@@ -13,14 +13,15 @@ leur origine et réduire les erreurs dès la saisie ?
 - 11 règles de validation (Python/pandas, avec 3 règles rejouées et validées croisées en SQL/DuckDB) : cohérence pièce/saisie, cohérence interne, référentiel, complétude, format, doublons
 - Évaluation contre une vérité terrain : **précision 100 %, rappel 100 %** (396 vrais positifs, 0 faux positif, 0 faux négatif)
 - Analyse des typologies d'erreurs par règle, agent, centre et type de pièce
-- Corrections traçables (journal avant / après / source), sans écrasement des données d'origine
+- Corrections traçables (journal avant / après / source) : 338 corrections automatiques, 106 laissées à une action humaine, sans écrasement des données d'origine
 - Dictionnaire de données, catalogue de règles, fiche de bonnes pratiques, rapport de conformité
 
 ## Résultats clés
 - **5 060 enrôlements contrôlés, 396 avec anomalie(s) (7,8 %), 444 anomalies détectées** (certains enrôlements déclenchent plusieurs règles)
 - Les écarts entre saisie et pièce (noms, prénoms, dates, sexe, lieu de naissance) représentent 58 % des anomalies
 - Deux agents sur 40 concentrent des taux d'anomalies de 20,9 % et 20,8 %, contre 7,2 % de médiane, chacun avec un type d'erreur dominant différent (dates de naissance vs noms)
-- 278 anomalies corrigées automatiquement à partir de la pièce justificative ; 166 nécessitent une action humaine (doublon, champ manquant, téléphone, code commune)
+- 338 anomalies corrigées automatiquement à partir de la pièce justificative (avec une condition de sécurité pour R08 : correction seulement si le code de la pièce est lui-même valide) ; 106 nécessitent une action humaine (doublon, téléphone)
+- Le score de 100 % précision/rappel s'explique par la construction du jeu de test (règles et injection d'anomalies fondées sur la même logique) et est documenté comme telle dans les limites du rapport — un tel score ne se reproduirait pas sur des données réelles
 
 ## Limites
 - Données synthétiques : les résultats ne reflètent aucun système réel, en particulier celui de l'ANIP.

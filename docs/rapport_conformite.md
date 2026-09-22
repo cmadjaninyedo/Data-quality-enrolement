@@ -12,6 +12,32 @@
 | Anomalies détectées (toutes règles) | 444 |
 | Anomalies critiques (R06 + R07) | 22 |
 
+**Note sur l'écart 396 / 444 :** 48 enrôlements cumulent deux règles déclenchées
+simultanément (348 × 1 règle + 48 × 2 règles = 444). Le détail est documenté dans
+`docs/catalogue_regles.md`.
+
+### Matrice de confusion (niveau enrôlement), lecture métier
+
+| | Anomalie réelle | Pas d'anomalie |
+|---|---:|---:|
+| **Signalé** | VP = 396 | FP = 0 |
+| **Non signalé** | FN = 0 | VN = 4 664 |
+
+- **Faux positif** (dossier sain signalé à tort) : coût = temps agent perdu à revérifier un
+  dossier déjà conforme.
+- **Faux négatif** (anomalie réelle non détectée) : coût = une donnée erronée entre dans le
+  registre, avec un impact potentiel sur l'identité légale d'une personne — un risque plus
+  grave qu'un faux positif dans ce contexte, ce qui justifie de préférer des règles
+  légèrement plus strictes en production, quitte à générer davantage de faux positifs.
+
+**Limite méthodologique importante :** ce score de 100 % / 100 % est attendu et non
+significatif en soi : les règles ont été conçues à partir de la même logique que celle
+ayant servi à injecter les anomalies dans ce jeu de données synthétique. Sur des données
+réelles, un tel score ne se reproduirait jamais — les erreurs de saisie réelles prennent
+des formes que des règles, même bien conçues, ne couvrent jamais entièrement. En
+production, la performance se mesurerait par échantillonnage et revue humaine, pas par
+comparaison à une vérité terrain connue.
+
 ## 2. Répartition par type d'anomalie
 
 | Règle | Nom | Nombre | Part |
@@ -47,15 +73,13 @@ deux agents dans ces centres plutôt qu'un problème structurel propre au centre
 
 ## 4. Corrections effectuées / en attente
 
-| Statut | Nombre |
-|---|---:|
-| Corrigé (à partir de la pièce justificative) | 278 |
-| À arbitrer (doublon) | 60 |
-| À recontacter (téléphone non vérifiable) | 46 |
-| À compléter (champ manquant) | 34 |
-| À corriger manuellement (code commune hors référentiel) | 26 |
+| Statut | Nombre | Base de la décision |
+|---|---:|---|
+| Corrigé automatiquement (R01–R09) | 338 | Valeur correspondante de la pièce justificative ; pour R08, seulement si le code de la pièce est lui-même valide dans le référentiel |
+| À arbitrer (R11, doublon) | 60 | Un ré-enrôlement peut être une fraude, une erreur ou une correction légitime : décision humaine requise |
+| À recontacter (R10, téléphone) | 46 | Aucune pièce ne prouve un numéro de téléphone |
 
-Détail dans `data/outputs/journal_corrections.csv`.
+Détail ligne par ligne (avant/après/source) dans `data/outputs/journal_corrections.csv`.
 
 ## 5. Recommandations
 

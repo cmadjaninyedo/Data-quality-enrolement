@@ -32,3 +32,25 @@ Les règles R06, R08 et R11 ont été réécrites en SQL (DuckDB, voir `src/rule
 et produisent exactement les mêmes ensembles d'identifiants que la version pandas
 (`src/rules.py`), ce qui confirme l'absence d'erreur d'implémentation d'un côté ou de
 l'autre.
+
+## Base des corrections automatiques (src/apply_corrections.py)
+
+| Règle | Corrigée automatiquement ? | Base |
+|---|---|---|
+| R01–R07, R09 | Oui | Valeur correspondante de la pièce (comparaison directe saisie/pièce, la pièce fait foi) |
+| R08 | Oui, sous condition | Valeur de la pièce, **seulement si ce code est lui-même valide dans le référentiel** (c'est un problème de conformité référentielle, pas un simple écart texte : la pièce elle-même pourrait contenir un code invalide) |
+| R10 | Non | Aucune pièce ne prouve un numéro de téléphone -> statut "à recontacter" |
+| R11 | Non | Un doublon peut être une fraude, une erreur de saisie ou une correction légitime -> statut "à arbitrer" (décision humaine) |
+
+**Bilan réel (`journal_corrections.csv`) : 338 anomalies corrigées automatiquement, 106 laissées à une action humaine** (46 "à recontacter", 60 "à arbitrer").
+
+## Pourquoi les enrôlements avec anomalie(s) (396) sont inférieurs aux anomalies détectées (444)
+
+48 enrôlements cumulent deux règles déclenchées simultanément (348 en ont une seule) :
+348×1 + 48×2 = 444. Les combinaisons observées :
+
+| Combinaison | Cas | Explication |
+|---|---:|---|
+| R05 + R08 | 26 | Un code commune erroné est presque toujours aussi absent du référentiel : les deux règles regardent le même champ sous deux angles différents |
+| R03 + R06 | 12 | Une date de naissance postérieure à l'enrôlement est mécaniquement aussi différente de la pièce |
+| R03 + R07 | 10 | Un âge invraisemblable (> 110 ans) est mécaniquement aussi différent de la pièce |
