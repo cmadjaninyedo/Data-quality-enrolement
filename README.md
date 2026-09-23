@@ -21,7 +21,7 @@ leur origine et réduire les erreurs dès la saisie ?
 - Les écarts entre saisie et pièce (noms, prénoms, dates, sexe, lieu de naissance) représentent 58 % des anomalies
 - Deux agents sur 40 concentrent des taux d'anomalies de 20,9 % et 20,8 %, contre 7,2 % de médiane, chacun avec un type d'erreur dominant différent (dates de naissance vs noms)
 - 338 anomalies corrigées automatiquement à partir de la pièce justificative (avec une condition de sécurité pour R08 : correction seulement si le code de la pièce est lui-même valide) ; 106 nécessitent une action humaine (doublon, téléphone)
-- Le score de 100 % précision/rappel s'explique par la construction du jeu de test (règles et injection d'anomalies fondées sur la même logique) et est documenté comme telle dans les limites du rapport — un tel score ne se reproduirait pas sur des données réelles
+- Le score de 100 % précision/rappel s'explique par la construction du jeu de test (règles et injection d'anomalies fondées sur la même logique) et est documenté comme telle dans les limites du rapport,ss un tel score ne se reproduirait pas sur des données réelles
 
 ## Limites
 - Données synthétiques : les résultats ne reflètent aucun système réel, en particulier celui de l'ANIP.

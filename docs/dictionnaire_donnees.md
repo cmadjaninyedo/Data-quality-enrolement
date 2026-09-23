@@ -1,6 +1,6 @@
 # Dictionnaire de données
 
-## Table `enrolements` (saisies des agents — 5 060 lignes)
+## Table `enrolements` (saisies des agents : 5 060 lignes)
 
 | Champ | Type | Description | Obligatoire | Format / valeurs | Règle(s) associée(s) | Exemple |
 |---|---|---|---|---|---|---|
@@ -18,7 +18,7 @@
 | nom_mere | texte | Nom complet de la mère | Oui | texte libre | R09 | ADJOVI Espérance |
 | telephone | texte | Numéro de téléphone (optionnel) | Non | `01` + 8 chiffres (après normalisation) | R10 | +229 01 62 88 05 20 |
 
-## Table `pieces_justificatives` (source de vérité — 5 000 lignes)
+## Table `pieces_justificatives` (source de vérité : 5 000 lignes)
 
 Mêmes champs que `enrolements` pour `id_piece`, `type_piece`, `nom`, `prenoms`,
 `date_naissance`, `sexe`, `code_commune_naissance`, `nom_mere` : ce sont les valeurs
@@ -26,7 +26,7 @@ de référence transcrites depuis la pièce présentée par le citoyen. Un `id_p
 apparaît une seule fois dans cette table (contrairement à `enrolements`, où les
 doublons de saisie sont possibles).
 
-## Table `ref_communes` (référentiel simplifié, non officiel — 77 lignes)
+## Table `ref_communes` (référentiel simplifié, non officiel : 77 lignes)
 
 | Champ | Type | Description | Exemple |
 |---|---|---|---|
@@ -34,7 +34,7 @@ doublons de saisie sont possibles).
 | commune | texte | Nom de la commune | Kandi |
 | departement | texte | Département de rattachement | Alibori |
 
-## Table `rapport_anomalies` (sortie de `run_checks.py` — 444 lignes)
+## Table `rapport_anomalies` (sortie de `run_checks.py` : 444 lignes)
 
 | Champ | Description |
 |---|---|

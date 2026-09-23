@@ -11,8 +11,8 @@ Fichiers produits dans data/raw/ :
                                     -> la SOURCE DE VÉRITÉ pour la comparaison
   - enrolements.csv               : saisies numériques faites par les agents (avec erreurs)
   - ref_communes.csv              : référentiel des communes (code, commune, département)
-  - verite_terrain_anomalies.csv  : liste des anomalies injectées (pour évaluer TES règles)
-                                    -> à ne consulter QU'APRÈS avoir écrit tes règles
+  - verite_terrain_anomalies.csv  : liste des anomalies injectées (pour évaluer les règles)
+                                    -> à ne consulter QU'APRÈS avoir écrit les règles
 
 Usage :  python generate_data.py
 """

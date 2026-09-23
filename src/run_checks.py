@@ -1,9 +1,3 @@
-"""
-Exécute toutes les règles et écrit data/outputs/rapport_anomalies.csv
-
-Usage (depuis la racine du dépôt) :  python src/run_checks.py
-Les règles pas encore implémentées (NotImplementedError) sont simplement ignorées.
-"""
 import sys
 from pathlib import Path
 

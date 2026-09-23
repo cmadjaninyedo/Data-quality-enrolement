@@ -26,14 +26,14 @@ simultanément (348 × 1 règle + 48 × 2 règles = 444). Le détail est documen
 - **Faux positif** (dossier sain signalé à tort) : coût = temps agent perdu à revérifier un
   dossier déjà conforme.
 - **Faux négatif** (anomalie réelle non détectée) : coût = une donnée erronée entre dans le
-  registre, avec un impact potentiel sur l'identité légale d'une personne — un risque plus
+  registre, avec un impact potentiel sur l'identité légale d'une personne, un risque plus
   grave qu'un faux positif dans ce contexte, ce qui justifie de préférer des règles
   légèrement plus strictes en production, quitte à générer davantage de faux positifs.
 
 **Limite méthodologique importante :** ce score de 100 % / 100 % est attendu et non
 significatif en soi : les règles ont été conçues à partir de la même logique que celle
 ayant servi à injecter les anomalies dans ce jeu de données synthétique. Sur des données
-réelles, un tel score ne se reproduirait jamais — les erreurs de saisie réelles prennent
+réelles, un tel score ne se reproduirait jamais. Les erreurs de saisie réelles prennent
 des formes que des règles, même bien conçues, ne couvrent jamais entièrement. En
 production, la performance se mesurerait par échantillonnage et revue humaine, pas par
 comparaison à une vérité terrain connue.
